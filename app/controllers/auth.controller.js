@@ -64,8 +64,7 @@ exports.signin = (req, res) => {
         });
       }
 
-      const token = jwt.sign({ id: user.id },
-                              config.secret,
+      const token = jwt.sign({ id: user.id }, config.secret,
                               {
                                 algorithm: 'HS256',
                                 allowInsecureKeySizes: true,
@@ -82,7 +81,9 @@ exports.signin = (req, res) => {
           username: user.username,
           email: user.email,
           roles: authorities,
-          accessToken: token
+          accessToken: token,
+          redirectURL: "/dashboard",
+          success: true
         });
       });
     })
