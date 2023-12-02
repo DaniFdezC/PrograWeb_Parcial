@@ -1,17 +1,14 @@
 // login.js
 
 function login() {
-    // Obtener los valores de username y password
     var username = document.getElementById("i_username").value;
     var password = document.getElementById("i_password").value;
   
-    // Crear un objeto con los datos a enviar
     var data = {
       username: username,
       password: password,
     };
   
-    // Configurar la opción de la solicitud
     var requestOptions = {
       method: "POST",
       headers: {
@@ -20,7 +17,6 @@ function login() {
       body: JSON.stringify(data),
     };
   
-    // Enviar la solicitud a la API
     fetch("http://localhost:8080/api/auth/signin", requestOptions)
       .then((response) => response.json())
       .then((data) => {
@@ -31,7 +27,6 @@ function login() {
           }
       })
       .catch((error) => {
-        // Manejar errores
         console.error("Error:", error);
       });
   }
