@@ -1,4 +1,7 @@
-// login.js
+document.addEventListener("DOMContentLoaded", function() {
+  // Elimina el elemento "token" del localStorage
+  localStorage.removeItem("token");
+});
 
 function login() {
     var username = document.getElementById("i_username").value;
@@ -21,10 +24,11 @@ function login() {
       .then((response) => response.json())
       .then((data) => {
         if (data.success) {
-            window.location.href = data.redirectURL;
-          } else {
-            console.error("Inicio de sesión fallido");
-          }
+          localStorage.setItem('token', data.accessToken);
+          window.location.href = data.redirectURL;
+        } else {
+          console.error("Inicio de sesión fallido");
+        }
       })
       .catch((error) => {
         console.error("Error:", error);
