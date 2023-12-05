@@ -9,8 +9,6 @@ var jwt = require("jsonwebtoken");
 var bcrypt = require("bcryptjs");
 
 exports.signup = (req, res) => {
-  console.log("aaa");
-  console.log(req);
   User.create({
     username: req.body.username,
     email: req.body.email,
@@ -30,7 +28,6 @@ exports.signup = (req, res) => {
           });
         });
       } else {
-        // user role = 1
         user.setRoles([1]).then(() => {
           res.send({ message: "User was registered successfully!" });
         });
