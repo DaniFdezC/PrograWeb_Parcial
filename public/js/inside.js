@@ -5,23 +5,23 @@ document.getElementById('ss').addEventListener('click', function() {
 
 function verificarTokenEnServidor(token) {
   fetch('/api/redireccionToken', {
-      method: 'GET',
-      headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + token
-      },
-      //body: JSON.stringify(data),
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + token
+    },
   })
   .then(response => response.json())
   .then(data => {
-    console.log(data)
-      if (data.valido) {
-          window.location.href = data.redirectURL;
-      } else {
-          alert('Token no válido');
-      }
+    console.log(data);
+    if (data.valido) {
+      console.log(data.redirectURL)
+      window.location.href = data.redirectURL;
+    } else {
+      alert('Token no válido');
+    }
   })
   .catch(error => {
-      console.error('Error al verificar el token:', error);
+    console.error('Error al verificar el token:', error);
   });
 }

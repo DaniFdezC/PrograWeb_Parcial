@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function() {
-  // Elimina el elemento "token" del localStorage
   localStorage.removeItem("token");
 });
 

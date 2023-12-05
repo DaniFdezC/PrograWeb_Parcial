@@ -64,27 +64,28 @@ exports.signin = (req, res) => {
         });
       }
 
-      const token = jwt.sign({ id: user.id }, config.secret,
-                              {
-                                algorithm: 'HS256',
-                                allowInsecureKeySizes: true,
-                                expiresIn: 86400, // 24 hours
-                              });
+      const token = jwt.sign({ id: user.id }, config.secret, {
+        algorithm: 'HS256',
+        allowInsecureKeySizes: true,
+        expiresIn: 86400, // 24 hours
+      });
 
       var authorities = [];
       user.getRoles().then(roles => {
         for (let i = 0; i < roles.length; i++) {
           authorities.push("ROLE_" + roles[i].name.toUpperCase());
-        }
-        res.status(200).send({
-          id: user.id,
-          username: user.username,
-          email: user.email,
-          roles: authorities,
-          accessToken: token,
-          redirectURL: "/dashboard",
-          success: true
-        });
+      }
+
+      res.status(200).send({
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        roles: authorities,
+        accessToken: token,
+        redirectURL: "/dashboard",
+        success: true
+      });
+      
       });
     })
     .catch(err => {

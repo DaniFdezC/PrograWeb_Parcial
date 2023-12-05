@@ -34,36 +34,17 @@ app.get("/signup", (req, res) => {
   res.sendFile(__dirname+'/public/html/signup.html')
 })
 
+//// LIMPIAR TODO ESTO
 app.get("/dashboard", (req, res) => {
   res.sendFile(__dirname+'/public/html/si.html')
 })
 
 app.get("/paginaUsuario", (req, res) => {
-  // verificar TOKEN, si vale --> 
   res.sendFile(__dirname+'/public/html/otraPagina.html')
 })
 
 ///////////////////////////////// IDEAS IDEAS IDEAS
-/*
-app.get("/api/redireccionToken", (req, res) => {
-  const token = req.body.token;
-  if (!token) {
-    console.log("NO HAY TOKEN")
-  }
-
-  jwt.verify(token, config.secret, (err, decoded) => {
-    if (err) {
-      console.log("ERROR 2 TOKEN")
-      return res.json({ tokenValido: false });
-    }
-    res.json({
-      valido: true,
-      redirectURL: __dirname+'\\public\\html\\otraPagina.html'
-    });
-  });
-});*/
-
-app.get("/api/redireccionToken", (req, res) => {
+/*app.get("/api/redireccionToken", (req, res) => {
   const token = req.headers.authorization;
 
   if (!token) {
@@ -80,7 +61,42 @@ app.get("/api/redireccionToken", (req, res) => {
       redirectURL: '/paginaUsuario'
     });
   });
+});*/
+
+app.get("/api/redireccionToken", (req, res) => {
+  const token = req.headers.authorization;
+
+  if (!token) {
+    return res.status(401).json({ mensaje: 'Token no proporcionado' });
+  }
+
+  jwt.verify(token.replace('Bearer ', ''), config.secret, (err, usuario) => {
+    if (err) {
+      return res.status(403).json({ mensaje: 'Token no válido' });
+    }
+
+    const roles = usuario.roles || [];
+    console.log(usuario)
+
+    // Lógica de redirección basada en roles
+    if (roles.includes('admin')) {
+      redirectURL = '/public/html/paginaAdmin.html';
+    } else if (roles.includes('user')) {
+      redirectURL = '/public/html/paginaUser.html';
+    } else if (roles.includes('moderator')) {
+      redirectURL = '/public/html/paginaModerator.html';
+    } else {
+      // Manejar otros roles o escenarios según sea necesario
+      redirectURL = '/public/html/default.html';
+    }
+
+    res.json({
+      valido: true,
+      redirectURL: redirectURL,
+    });
+  });
 });
+
 
 require('./app/routes/auth.routes')(app);
 require('./app/routes/user.routes')(app);
