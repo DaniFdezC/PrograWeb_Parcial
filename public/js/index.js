@@ -66,7 +66,9 @@ function login() {
           localStorage.setItem('token', data.accessToken);
           window.location.href = data.redirectURL;
         } else {
-          console.error("Inicio de sesión fallido");
+          alert("Usuario o contraseña erróneo");
+          document.getElementById("username").value = "";
+          document.getElementById("password").value = "";
         }
       })
       .catch((error) => {
