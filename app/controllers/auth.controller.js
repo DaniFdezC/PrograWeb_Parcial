@@ -29,7 +29,12 @@ exports.signup = (req, res) => {
         });
       } else {
         user.setRoles([1]).then(() => {
-          res.send({ message: "User was registered successfully!" });
+          console.log("aaaaaaaaaaaaaa");
+          res.status(200).send({
+            redirectURL : "/",
+            success: true
+          });
+          //res.send({ message: "User was registered successfully!" });
         });
       }
     })
@@ -61,28 +66,28 @@ exports.signin = (req, res) => {
         });
       }
 
-      const token = jwt.sign({ id: user.id }, config.secret, {
-        algorithm: 'HS256',
-        allowInsecureKeySizes: true,
-        expiresIn: 86400, // 24 hours
-      });
-
-      var authorities = [];
       user.getRoles().then(roles => {
-        for (let i = 0; i < roles.length; i++) {
-          authorities.push("ROLE_" + roles[i].name.toUpperCase());
-      }
+        const token = jwt.sign(
+          { id: user.id, roles: roles.map(role => role.name) },
+          config.secret,
+          {
+            algorithm: 'HS256',
+            allowInsecureKeySizes: true,
+            expiresIn: 86400, // 24 hours
+          }
+        );
 
-      res.status(200).send({
-        id: user.id,
-        username: user.username,
-        email: user.email,
-        roles: authorities,
-        accessToken: token,
-        redirectURL: "/dashboard",
-        success: true
-      });
-      
+        var authorities = roles.map(role => "ROLE_" + role.name.toUpperCase());
+
+        res.status(200).send({
+          id: user.id,
+          username: user.username,
+          email: user.email,
+          roles: authorities,
+          accessToken: token,
+          redirectURL: "/dashboard",
+          success: true
+        });
       });
     })
     .catch(err => {

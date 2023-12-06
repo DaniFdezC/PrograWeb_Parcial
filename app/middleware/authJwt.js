@@ -20,6 +20,8 @@ verifyToken = (req, res, next) => {
     }
     
     req.userId = decoded.id;
+    req.roles = decoded.roles;
+    console.log(req)
     next();
   });
 };

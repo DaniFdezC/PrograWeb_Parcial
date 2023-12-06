@@ -21,3 +21,7 @@
 
 - Dashboard simple
     - Extras (?)
+
+
+
+Verificar token + firma
