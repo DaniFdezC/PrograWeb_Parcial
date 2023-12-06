@@ -33,7 +33,7 @@ function createUser(){
       alert("Usuario creado con éxito");
       window.location.href = data.redirectURL;
     } else {
-      console.error("Inicio de sesión fallido");
+      alert("El usuario o email ya existe");
     }
   })
   .catch((error) => {

@@ -53,8 +53,9 @@ app.get("/api/redireccionToken", (req, res) => {
     console.log(usuario);
 
     let redirectURL = '/';
+
+    // dependiendo del rol te trae unos datos u otros
     if (roles.includes('admin')) {
-      console.log("SOY ADMIN");
       redirectURL = '/paginaAdmin';
     } else if (roles.includes('moderator')) {
       redirectURL = '/paginaModerator';
@@ -85,5 +86,5 @@ require('./app/routes/user.routes')(app);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+  console.log(`Server corriendo en el puerto: ${PORT}.`);
 });

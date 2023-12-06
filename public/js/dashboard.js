@@ -3,10 +3,10 @@ function loadRole(){
   if (!token) {
     alert("No hay token registrado, debes hacer login primero");
   }
-  verificaTokenYRedirige(token);
+  checkTokenAndRedirect(token);
 }
 
-function verificaTokenYRedirige(token) {
+function checkTokenAndRedirect(token) {
   fetch('/api/redireccionToken', {
     method: 'GET',
     headers: {
