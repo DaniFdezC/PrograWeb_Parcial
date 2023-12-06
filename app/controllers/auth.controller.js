@@ -24,17 +24,18 @@ exports.signup = (req, res) => {
           }
         }).then(roles => {
           user.setRoles(roles).then(() => {
-            res.send({ message: "User was registered successfully!" });
+            res.status(200).send({
+              redirectURL : "/",
+              success: true
+            });
           });
         });
       } else {
         user.setRoles([1]).then(() => {
-          console.log("aaaaaaaaaaaaaa");
           res.status(200).send({
             redirectURL : "/",
             success: true
           });
-          //res.send({ message: "User was registered successfully!" });
         });
       }
     })
@@ -73,7 +74,7 @@ exports.signin = (req, res) => {
           {
             algorithm: 'HS256',
             allowInsecureKeySizes: true,
-            expiresIn: 86400, // 24 hours
+            expiresIn: 86400, 
           }
         );
 

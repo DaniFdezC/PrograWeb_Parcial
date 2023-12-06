@@ -9,6 +9,15 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+select {
+    padding: 10px;
+    border: 1px solid #240b36;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
 .login-container {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 8px;
@@ -16,6 +25,10 @@ body {
     padding: 40px;
     width: 300px;
     text-align: center;
+}
+
+h1 {
+    color : white;
 }
 
 h2 {

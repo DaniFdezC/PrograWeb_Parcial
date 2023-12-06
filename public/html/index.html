@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/styles.css">
-    <script src="../js/signin.js"></script>
+    <script src="../js/index.js"></script>
     <title>Inicio</title>
 </head>
 <body>
@@ -38,6 +38,15 @@
             <div class="input-container">
                 <label for="email">Correo electrónico:</label>
                 <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="input-container">
+                <label for="user-role">Rol:</label>
+                <select id="user-role" name="user-role">
+                    <option value="user">Usuario</option>
+                    <option value="admin">Administrador</option>
+                    <option value="moderator">Moderador</option>
+                </select>
             </div>
 
             <button type="submit">Crear usuario</button>

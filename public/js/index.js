@@ -6,11 +6,13 @@ function createUser(){
   var newUsername = document.getElementById("new-username").value;
   var newPassword = document.getElementById("new-password").value;
   var newEmail = document.getElementById("email").value;
+  var role = document.getElementById("user-role").value;
 
   var data = {
     username : newUsername,
     password : newPassword,
-    email : newEmail
+    email : newEmail,
+    roles : [role]
   }
 
   console.log(data)
@@ -26,6 +28,7 @@ function createUser(){
   fetch("http://localhost:8080/api/auth/signup", requestOptions)
   .then((response) => response.json())
   .then((data) => {
+    console.log(data)
     if (data.success) {
       alert("Usuario creado con éxito");
       window.location.href = data.redirectURL;

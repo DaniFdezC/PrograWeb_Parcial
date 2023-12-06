@@ -1,5 +1,8 @@
 function loadRole(){
   const token = localStorage.getItem('token');
+  if (!token) {
+    alert("No hay token registrado, debes hacer login primero");
+  }
   verificaTokenYRedirige(token);
 }
 

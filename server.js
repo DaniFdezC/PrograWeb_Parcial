@@ -1,10 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 
-/// ELIMINAR
 const jwt = require("jsonwebtoken");
 const config = require("./app/config/auth.config")
-////
 
 const app = express();
 
@@ -35,13 +33,10 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname+'/public/html/index.html')
 })
 
-app.get("/signup", (req, res) => {
-  res.sendFile(__dirname+'/public/html/signup.html')
-})
-
 app.get("/dashboard", (req, res) => {
   res.sendFile(__dirname+'/public/html/dashboard.html')
 })
+
 app.get("/api/redireccionToken", (req, res) => {
   const token = req.headers.authorization;
 
