@@ -51,3 +51,8 @@ function initial() {
   });
 }
 ```
+
+4. Descargar los modulos de node
+```node
+npm install
+```
